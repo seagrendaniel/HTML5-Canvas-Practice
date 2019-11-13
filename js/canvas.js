@@ -23,9 +23,6 @@ var c = canvas.getContext('2d');
 
 // // Arc/Circle
 // for (let i = 0; i < 100; i++) {
-//     let red = Math.random() * 255;
-//     let green = Math.random() * 255;
-//     let blue = Math.random() * 255;
 //     let x = Math.random() * window.innerWidth;
 //     let y = Math.random() * window.innerHeight;
 //     c.beginPath();          // Must always precede new arcs/lines with beginPath in order to make a new path
@@ -35,6 +32,9 @@ var c = canvas.getContext('2d');
 // }
 
 function Circle(x, y, dx, dy, radius) {
+    let red = Math.random() * 255;
+    let green = Math.random() * 255;
+    let blue = Math.random() * 255;
     this.x = x;
     this.y = y;
     this.dx = dx;
@@ -46,6 +46,8 @@ function Circle(x, y, dx, dy, radius) {
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         c.strokeStyle = 'blue';
         c.stroke();
+        c.fillStyle = `rgba(${red}, ${green}, ${blue}, 0.5)`
+        c.fill();
     }
 
     this.update = function () {
@@ -67,11 +69,11 @@ function Circle(x, y, dx, dy, radius) {
 let circleArray = [];
 
 for (let i = 0; i < 100; i++) {
-    let x = Math.random() * innerWidth;
-    let dx = (Math.random() - 0.5) * 10;
-    let y = Math.random() * innerHeight;
-    let dy = (Math.random() - 0.5) * 10;   
     let radius = 50;
+    let x = Math.random() * (innerWidth - radius * 2) + radius;
+    let dx = (Math.random() - 0.5) * 5;
+    let y = Math.random() * (innerHeight - radius * 2) + radius;
+    let dy = (Math.random() - 0.5) * 5;
     circleArray.push(new Circle(x, y, dx, dy, radius));
 }
 
