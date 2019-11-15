@@ -6,6 +6,17 @@ canvas.height = window.innerHeight;
 var c = canvas.getContext('2d');
 
 
+var mouse = {
+    x: undefined,
+    y: undefined
+}
+
+window.addEventListener('mousemove', function (event) {
+    console.log(event);
+    mouse.x = event.x;
+    mouse.y = event.y;
+})
+
 function Square(x, y, dx, dy, l) {
     let red = Math.random() * 255;
     let green = Math.random() * 255;
@@ -16,12 +27,12 @@ function Square(x, y, dx, dy, l) {
     this.dy = dy;
     this.l = l
 
-    this.sqDraw = function() {
+    this.sqDraw = function () {
         c.fillStyle = `rgba(${red}, ${green}, ${blue}, 0.5)`
         c.fillRect(this.x, this.y, l, l);
     }
 
-    this.sqUpdate = function() {
+    this.sqUpdate = function () {
         if (this.x + l > innerWidth || this.x < 0) {
             this.dx *= -1;
         }
@@ -30,14 +41,22 @@ function Square(x, y, dx, dy, l) {
         }
         this.x += this.dx;
         this.y += this.dy;
+
+        // Interactivity
+        if (mouse.x - this.x < 50 && mouse.x - this.x > -50 && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
+            l += 1;
+        } else if (this.l > 2) {
+            l -= 1;
+        }
+
         this.sqDraw();
     }
 }
 
 let squareArray = [];
 
-for (let i = 0; i < 50; i++) {
-    let l = 75;
+for (let i = 0; i < 75; i++) {
+    let l = Math.random() * 100;
     let x = Math.random() * (innerWidth - l * 2) + l;
     let dx = (Math.random() - 0.5) * 5;
     let y = Math.random() * (innerHeight - l * 2) + l;
@@ -72,6 +91,14 @@ function Circle(x, y, dx, dy, radius) {
             this.dy *= -1;
         }
 
+        // Interactivity
+        if (mouse.x - this.x < 50 && mouse.x - this.x > -50 && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
+            this.radius += 1;
+        } else if (this.radius > 2) {
+            this.radius -= 1;
+        }
+
+
         this.x += this.dx;
         this.y += this.dy;
         this.draw();
@@ -80,8 +107,8 @@ function Circle(x, y, dx, dy, radius) {
 
 let circleArray = [];
 
-for (let i = 0; i < 50; i++) {
-    let radius = 50;
+for (let i = 0; i < 75; i++) {
+    let radius = Math.random() * 50;
     let x = Math.random() * (innerWidth - radius * 2) + radius;
     let dx = (Math.random() - 0.5) * 5;
     let y = Math.random() * (innerHeight - radius * 2) + radius;
