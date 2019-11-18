@@ -29,14 +29,14 @@ function Square(x, y, dx, dy, l) {
 
     this.sqDraw = function () {
         c.fillStyle = `rgba(${red}, ${green}, ${blue}, 0.5)`
-        c.fillRect(this.x, this.y, l, l);
+        c.fillRect(this.x, this.y, this.l, this.l);
     }
 
     this.sqUpdate = function () {
-        if (this.x + l > innerWidth || this.x < 0) {
+        if (this.x + this.l > innerWidth || this.x < 0) {
             this.dx *= -1;
         }
-        if (this.y + l > innerHeight || this.y < 0) {
+        if (this.y + this.l > innerHeight || this.y < 0) {
             this.dy *= -1;
         }
         this.x += this.dx;
@@ -44,10 +44,11 @@ function Square(x, y, dx, dy, l) {
 
         // Interactivity
         if (mouse.x - this.x < 50 && mouse.x - this.x > -50 && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
-            l += 1;
-        } else if (this.l > 2) {
-            l -= 1;
+            this.l += 1;
+        } else if (this.l > 18) {
+            this.l -= 1;
         }
+
 
         this.sqDraw();
     }
@@ -94,7 +95,7 @@ function Circle(x, y, dx, dy, radius) {
         // Interactivity
         if (mouse.x - this.x < 50 && mouse.x - this.x > -50 && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
             this.radius += 1;
-        } else if (this.radius > 2) {
+        } else if (this.radius > 18) {
             this.radius -= 1;
         }
 
