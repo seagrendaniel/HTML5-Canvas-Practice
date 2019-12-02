@@ -22,6 +22,14 @@ const minRadius = 5;
 const maxSqLen = 40;
 const minSqLen = 5;
 
+const colorArray = [
+    '#ff33da',
+    '#de32ff',
+    '#dd1100',
+    '#f3d4e2',
+    '#ff22aa',
+];
+
 function Square(x, y, dx, dy, l) {
     let red = Math.random() * 255;
     let green = Math.random() * 255;
@@ -30,10 +38,11 @@ function Square(x, y, dx, dy, l) {
     this.y = y;
     this.dx = dx;
     this.dy = dy;
-    this.l = l
+    this.l = l;
+    this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
     this.sqDraw = function () {
-        c.fillStyle = `rgba(${red}, ${green}, ${blue}, 0.5)`
+        c.fillStyle = this.color;
         c.fillRect(this.x, this.y, this.l, this.l);
     }
 
@@ -63,12 +72,12 @@ function Square(x, y, dx, dy, l) {
 
 let squareArray = [];
 
-for (let i = 0; i < 100; i++) {
-    let l = Math.random() * 100;
+for (let i = 0; i < 200; i++) {
+    let l = Math.random() * 3 + 1;
     let x = Math.random() * (innerWidth - l * 2) + l;
-    let dx = (Math.random() - 0.5) * 5;
+    let dx = (Math.random() - 0.5) * 2;
     let y = Math.random() * (innerHeight - l * 2) + l;
-    let dy = (Math.random() - 0.5) * 5;
+    let dy = (Math.random() - 0.5) * 2;
     squareArray.push(new Square(x, y, dx, dy, l));
 }
 
@@ -83,11 +92,12 @@ function Circle(x, y, dx, dy, radius) {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
+    this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
     this.draw = function () {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        c.fillStyle = `rgba(${red}, ${green}, ${blue}, 0.5)`
+        c.fillStyle = this.color;
         c.fill();
     }
 
@@ -117,12 +127,12 @@ function Circle(x, y, dx, dy, radius) {
 
 let circleArray = [];
 
-for (let i = 0; i < 100; i++) {
-    let radius = Math.random() * 50;
+for (let i = 0; i < 200; i++) {
+    let radius = Math.random() * 3 + 1;
     let x = Math.random() * (innerWidth - radius * 2) + radius;
-    let dx = (Math.random() - 0.5) * 5;
+    let dx = (Math.random() - 0.5) * 2;
     let y = Math.random() * (innerHeight - radius * 2) + radius;
-    let dy = (Math.random() - 0.5) * 5;
+    let dy = (Math.random() - 0.5) * 2;
     circleArray.push(new Circle(x, y, dx, dy, radius));
 }
 
