@@ -22,7 +22,7 @@ window.addEventListener('resize', function () {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    init();
+    init();         // reset circle/sq array as window is resized
 })
 
 const maxRadius = 40;
@@ -31,11 +31,11 @@ const maxSqLen = 40;
 // const minSqLen = 5;
 
 const colorArray = [
-    '#ff33da',
-    '#de32ff',
-    '#dd1100',
-    '#f3d4e2',
-    '#ff22aa',
+    '#011C40',
+    '#03A688',
+    '#F28705',
+    '#F23005',
+    '#F2A099',
 ];
 
 function Square(x, y, dx, dy, l) {
@@ -130,7 +130,7 @@ let circleArray = [];
 
 function init() {
     squareArray = [];
-    for (let i = 0; i < 400; i++) {
+    for (let i = 0; i < 600; i++) {
         let l = Math.random() * 3 + 1;
         let x = Math.random() * (innerWidth - l * 2) + l;
         let dx = (Math.random() - 0.5) * 2;
@@ -141,7 +141,7 @@ function init() {
 
     circleArray = [];
 
-    for (let i = 0; i < 400; i++) {
+    for (let i = 0; i < 600; i++) {
         let radius = Math.random() * 3 + 1;
         let x = Math.random() * (innerWidth - radius * 2) + radius;
         let dx = (Math.random() - 0.5) * 2;
@@ -164,4 +164,5 @@ function animate() {
 
 animate();
 
+init();
 
