@@ -17,6 +17,11 @@ window.addEventListener('mousemove', function (event) {
     mouse.y = event.y;
 })
 
+const maxRadius = 40;
+const minRadius = 5;
+const maxSqLen = 40;
+const minSqLen = 5;
+
 function Square(x, y, dx, dy, l) {
     let red = Math.random() * 255;
     let green = Math.random() * 255;
@@ -44,8 +49,10 @@ function Square(x, y, dx, dy, l) {
 
         // Interactivity
         if (mouse.x - this.x < 50 && mouse.x - this.x > -50 && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
-            this.l += 1;
-        } else if (this.l > 18) {
+            if (this.l < maxSqLen) {
+                this.l += 1;
+            }
+        } else if (this.l > minSqLen) {
             this.l -= 1;
         }
 
@@ -56,7 +63,7 @@ function Square(x, y, dx, dy, l) {
 
 let squareArray = [];
 
-for (let i = 0; i < 75; i++) {
+for (let i = 0; i < 100; i++) {
     let l = Math.random() * 100;
     let x = Math.random() * (innerWidth - l * 2) + l;
     let dx = (Math.random() - 0.5) * 5;
@@ -94,8 +101,10 @@ function Circle(x, y, dx, dy, radius) {
 
         // Interactivity
         if (mouse.x - this.x < 50 && mouse.x - this.x > -50 && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
-            this.radius += 1;
-        } else if (this.radius > 18) {
+            if (this.radius < maxRadius) {
+                this.radius += 1;
+            }
+        } else if (this.radius > minRadius) {
             this.radius -= 1;
         }
 
@@ -108,7 +117,7 @@ function Circle(x, y, dx, dy, radius) {
 
 let circleArray = [];
 
-for (let i = 0; i < 75; i++) {
+for (let i = 0; i < 100; i++) {
     let radius = Math.random() * 50;
     let x = Math.random() * (innerWidth - radius * 2) + radius;
     let dx = (Math.random() - 0.5) * 5;
