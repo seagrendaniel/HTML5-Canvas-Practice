@@ -11,16 +11,24 @@ var mouse = {
     y: undefined
 }
 
+// Event Listeners
 window.addEventListener('mousemove', function (event) {
     console.log(event);
     mouse.x = event.x;
     mouse.y = event.y;
 })
 
+window.addEventListener('resize', function () {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    init();
+})
+
 const maxRadius = 40;
-const minRadius = 5;
+// const minRadius = 5;
 const maxSqLen = 40;
-const minSqLen = 5;
+// const minSqLen = 5;
 
 const colorArray = [
     '#ff33da',
@@ -39,6 +47,7 @@ function Square(x, y, dx, dy, l) {
     this.dx = dx;
     this.dy = dy;
     this.l = l;
+    this.minL = l;
     this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
     this.sqDraw = function () {
@@ -61,7 +70,7 @@ function Square(x, y, dx, dy, l) {
             if (this.l < maxSqLen) {
                 this.l += 1;
             }
-        } else if (this.l > minSqLen) {
+        } else if (this.l > this.minL) {
             this.l -= 1;
         }
 
@@ -71,15 +80,6 @@ function Square(x, y, dx, dy, l) {
 }
 
 let squareArray = [];
-
-for (let i = 0; i < 200; i++) {
-    let l = Math.random() * 3 + 1;
-    let x = Math.random() * (innerWidth - l * 2) + l;
-    let dx = (Math.random() - 0.5) * 2;
-    let y = Math.random() * (innerHeight - l * 2) + l;
-    let dy = (Math.random() - 0.5) * 2;
-    squareArray.push(new Square(x, y, dx, dy, l));
-}
 
 
 
@@ -92,6 +92,7 @@ function Circle(x, y, dx, dy, radius) {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
+    this.minRadius = radius;
     this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
     this.draw = function () {
@@ -114,7 +115,7 @@ function Circle(x, y, dx, dy, radius) {
             if (this.radius < maxRadius) {
                 this.radius += 1;
             }
-        } else if (this.radius > minRadius) {
+        } else if (this.radius > this.minRadius) {
             this.radius -= 1;
         }
 
@@ -127,13 +128,27 @@ function Circle(x, y, dx, dy, radius) {
 
 let circleArray = [];
 
-for (let i = 0; i < 200; i++) {
-    let radius = Math.random() * 3 + 1;
-    let x = Math.random() * (innerWidth - radius * 2) + radius;
-    let dx = (Math.random() - 0.5) * 2;
-    let y = Math.random() * (innerHeight - radius * 2) + radius;
-    let dy = (Math.random() - 0.5) * 2;
-    circleArray.push(new Circle(x, y, dx, dy, radius));
+function init() {
+    squareArray = [];
+    for (let i = 0; i < 400; i++) {
+        let l = Math.random() * 3 + 1;
+        let x = Math.random() * (innerWidth - l * 2) + l;
+        let dx = (Math.random() - 0.5) * 2;
+        let y = Math.random() * (innerHeight - l * 2) + l;
+        let dy = (Math.random() - 0.5) * 2;
+        squareArray.push(new Square(x, y, dx, dy, l));
+    }
+
+    circleArray = [];
+
+    for (let i = 0; i < 400; i++) {
+        let radius = Math.random() * 3 + 1;
+        let x = Math.random() * (innerWidth - radius * 2) + radius;
+        let dx = (Math.random() - 0.5) * 2;
+        let y = Math.random() * (innerHeight - radius * 2) + radius;
+        let dy = (Math.random() - 0.5) * 2;
+        circleArray.push(new Circle(x, y, dx, dy, radius));
+    }
 }
 
 function animate() {
